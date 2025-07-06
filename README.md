@@ -1,3 +1,5 @@
+# Hilzer’s Barbershop Problem — Operating Systems Project
+
 
 ## Introduction
 
@@ -20,7 +22,7 @@ The specific requirements for this project are to:
 - Compare how different AI tools (**GPT** and **Cloud**) propose solutions for this concurrency problem.
 
 
-# Hilzer’s Barbershop Problem — Operating Systems Project
+
 
 Este repositório contém três implementações distintas para o problema de concorrência conhecido como **Hilzer’s Barbershop**, adaptado do livro _The Little Book of Semaphores_ (Seção 5.4). As soluções foram implementadas em C utilizando `pthreads`, `mutexes` e `variáveis de condição`.
 
