@@ -10,7 +10,7 @@ The project involves both technical implementation and a comparative study of di
 ## Objectives
 
 - **Technical Objective**: Implement a solution for the Hilzer's Barbershop problem using **locks** and **condition variables** in C with pthreads.
-- **AI Tools Comparison**: Investigate and compare the different generative AI tools (**GPT** and **Cloud**) to solve the same concurrency problem. Document the interactions and provide a critical analysis of the outcomes.
+- **AI Tools Comparison**: Investigate and compare the different generative AI tools (**GPT-4o** and **Claude Sonnet 4**) to solve the same concurrency problem. Document the interactions and provide a critical analysis of the outcomes.
 
 ## Problem Overview
 
@@ -19,7 +19,7 @@ The **Hilzer’s Barbershop problem** simulates a barbershop with multiple barbe
 The specific requirements for this project are to:
 - Adapt the semaphore-based solution to use **locks** and **condition variables**.
 - Implement synchronization and resource management to ensure proper concurrency among the barbers and customers.
-- Compare how different AI tools (**GPT** and **Cloud**) propose solutions for this concurrency problem.
+- Compare how different AI tools (**GPT-4o** and **Claude Sonnet 4**) propose solutions for this concurrency problem.
 
 
 
