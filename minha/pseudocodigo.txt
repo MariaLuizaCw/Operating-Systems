@@ -1,0 +1,122 @@
+Início
+
+    Definir MAX_CUSTOMERS, NUM_BARBERS, MAX_PEOPLE_IN_SHOP, SOFA_CAPACITY, MAX_SIZE
+    Definir Customer como estrutura (id, cond de espera para serviço, cond de espera para sofá)
+    Definir Queue como estrutura (itens[], front, rear, count, capacidade)
+    
+    Variáveis globais:
+        customer_data ← Lista de clientes
+        standing_queue ← Fila para clientes em pé
+        sofa_queue ← Fila para clientes no sofá
+        sofa_count ← 0
+        num_people_in_shop ← 0
+        standing_count ← 0
+        mutex ← Mutex principal
+        payment_mutex ← Mutex para pagamento
+        work_available ← Condição para trabalho disponível
+        work_done ← Falso
+
+    Função inicializarFila(Queue q, tamanho):
+        Alocar memória para fila
+        Inicializar front, rear, count com 0
+        Definir capacidade
+
+    Função isEmpty(Queue q):
+        Retornar se q.count == 0
+
+    Função isFull(Queue q):
+        Retornar se q.count == q.capacidade
+
+    Função enqueue(Queue q, valor):
+        Se a fila não estiver cheia:
+            Adicionar valor na fila
+            Atualizar rear e count
+
+    Função dequeue(Queue q):
+        Se a fila não estiver vazia:
+            Retornar o valor na frente da fila
+            Atualizar front e count
+
+    Função peek(Queue q):
+        Se a fila não estiver vazia:
+            Retornar valor na frente da fila
+
+    Função find_customer_by_id(id):
+        Para cada cliente em customer_data:
+            Se o id do cliente for igual ao id procurado:
+                Retornar o cliente
+
+    Função random_time(min, max):
+        Retornar um número aleatório entre min e max
+
+    Função customer_func(Cliente cliente):
+        Imprimir "Cliente chegou"
+        Lock mutex
+        Se num_people_in_shop >= MAX_PEOPLE_IN_SHOP:
+            Imprimir "Cliente foi embora"
+            Destravar mutex
+            Retornar
+
+        Incrementar num_people_in_shop
+        Se sofa_count < SOFA_CAPACITY:
+            Cliente senta no sofá
+            Incrementar sofa_count
+            Enfileirar cliente na fila do sofá
+            Imprimir "Cliente sentou no sofá"
+            Sinalizar todos os barbeiros
+        Caso contrário:
+            Cliente fica em pé
+            Incrementar standing_count
+            Enfileirar cliente na fila de pé
+            Imprimir "Cliente ficou em pé"
+            Esperar na cond de espera do sofá
+
+        Esperar na cond de espera do serviço
+        Decrementar num_people_in_shop
+        Destravar mutex
+        Imprimir "Cliente saiu"
+
+    Função barber_func(Barbeiro barbeiro):
+        Enquanto trabalho disponível:
+            Lock mutex
+            Se não houver clientes no sofá:
+                Dormir até ter trabalho
+            Se houver cliente no sofá:
+                Remover cliente da fila do sofá
+                Decrementar sofa_count
+                Realizar corte
+                Se houver clientes em pé e espaço no sofá:
+                    Mover cliente para o sofá
+                    Despertar o cliente para se sentar
+                Destravar mutex
+                Simular corte com tempo aleatório
+                Lock payment_mutex
+                Realizar pagamento
+                Despertar cliente para sair
+                Destravar payment_mutex
+            Destravar mutex
+
+    Função main(argc, argv):
+        Se argc != 6:
+            Imprimir "Uso incorreto"
+            Retornar
+
+        Receber parâmetros via linha de comando
+
+        Alocar memória para customer_data, standing_queue, sofa_queue
+        Inicializar filas
+
+        Criar threads dos barbeiros
+        Criar threads dos clientes
+        Esperar as threads dos clientes terminarem
+
+        Sinalizar que o trabalho foi concluído
+        Acordar barbeiros restantes
+
+        Imprimir "Todos os clientes foram atendidos"
+
+        Cancelar threads dos barbeiros
+
+        Liberar recursos (mutexes, filas, memória)
+
+Fim
