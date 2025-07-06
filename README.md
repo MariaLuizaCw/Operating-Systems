@@ -42,7 +42,7 @@ Operating-Systems/
 │   ├── link_prompt.txt
 │   └── Makefile
 │
-└── minha/        # Solução final desenvolvida pelo grupo
+└── minha/        # Solução desenvolvida pelo grupo
     ├── barbershop
     ├── barbershop.c
     ├── link_prompt_pseudo.txt
